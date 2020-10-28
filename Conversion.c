@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 typedef
 enum boolean {
@@ -12,20 +13,19 @@ long double pow(double num,int pot) {
     int i;
     long double ret = num;
 
-    if(pot > 0)
-    {
+    if(pot > 0) {
         for(i = 1; i < pot; i++) {
             ret *= num;
         }
+        
         return ret;
-    }
-    else if(pot < 0)
-    {
-        double ret2 = 1;
+    } else if(pot < 0) {
+        ret = 1;
         for(i = 1; i <= -pot; i++) {
-            ret2 /= ret;
+            ret /= num;
         }
-        return ret2;
+
+        return ret;
     }
 
     return 1.0; 
@@ -35,75 +35,76 @@ long double toBaseTen(char* original_value, unsigned int base)
 {
     bool isNegative = false;
     long double soma = 0;
-
-    //RUIM. Consegue dinamico?
+    
+    char value[100];
     char result[100];
-    //RUIM tambem
     char aux[100];
 
-    //quebrado
     int commaPos;
-    char value[100];
-    
-    //char* intPart;
-    //char* decPart;
 
-    if(original_value[0] == '-')
-    {
+    if(original_value[0] == '-') {
         isNegative = true;
-        for(int j = 0; j <= strlen(original_value); j++)
-        {
+        for(int j = 0; j <= strlen(original_value); j++) {
             value[j] = original_value[j+1];
         }
-    }
-    else 
+    } else 
         strcpy(value, original_value);
 
-    if(strchr(original_value, ',') != NULL)
-    {
+    if(strchr(original_value, ',') != NULL) {
         int i, j;
-        for(j = 0; j < strlen(value); j++)
-        {
-            if(value[j] == ',')
-            {         
+        for(j = 0; j < strlen(value); j++) {
+            if(value[j] == ',') {         
                 commaPos = j;
                 break;
             }
         }
 
-        for(i = 0; i < commaPos; i++) 
-        {
-            soma += ((unsigned int)value[i] - 48) * pow(base, commaPos - i - 1);
+        for(i = 0; i < commaPos; i++) {   
+            int x;
+            if(isalpha(value[i])) {
+                if(islower(value[i]))
+                    value[i] = toupper(value[i]);
+                
+                x = value[i];
+                soma += (x - 55) * pow(base, commaPos - i - 1);
+            } else
+                soma += ((unsigned int)value[i] - 48) * pow(base, commaPos - i - 1);
         }
-        sprintf(result, "%llf", soma);
-        strcat(result, ",");
-        //soma = 0;
-        for(j = commaPos+1; j < strlen(value); j++)
-        {
-            soma += ((unsigned int)value[j] - 48) * pow(base, commaPos - j);
+
+        for(j = commaPos+1; j < strlen(value); j++) {
+            int x;
+            if(isalpha(value[j])) {
+                if(islower(value[j]))
+                    value[j] = toupper(value[j]);
+                
+                x = value[j];
+                soma += (x - 55) * pow(base, commaPos - j);
+            } else
+                soma += ((unsigned int)value[j] - 48) * pow(base, commaPos - j);
         }
-        sprintf(aux, "%llf", soma);
-        strcat(result, aux);
-    } 
-    else 
-    {
+    } else {
         int i;
-        for(i = 0; i < strlen(value); i++) 
-        {
-            soma += ((unsigned int)value[i] - 48) * pow(base, strlen(value) - i - 1);
+        for(i = 0; i < strlen(value); i++) {
+            int x;
+            if(isalpha(value[i])) {
+                if(islower(value[i]))
+                    value[i] = toupper(value[i]);
+                
+                x = value[i];
+                soma += (x - 55) * pow(base, strlen(value) - i - 1);
+            } else
+                soma += ((unsigned int)value[i] - 48) * pow(base, strlen(value) - i - 1);
         }
-        sprintf(result, "%llf", soma);
     }
 
     if(isNegative)
-    {
         soma = -soma;
-        strcpy(aux, "-");
-        strcat(aux, result);
-        strcpy(result, aux);
-    } 
 
     return soma;
+}
+
+char* fromBaseTen(long double original_value, unsigned int base) {
+    return "Make function here";
 }
 
 int main() 
@@ -130,13 +131,10 @@ int main()
     // scanf("%i", &final_base);
     // fflush(stdin);
 
-    //printf("%s %i %i\n", toBaseTen(str_value, original_base), original_base, final_base);
     char* value;
     value = (char*)malloc(100*sizeof(char));
-    strcpy(value, "-1001");
-    //strcpy(value, str_value);
-    //printf("%llf", toBaseTen(value, 2));
-    int a = 'A';
-    printf("%d", a);
+    strcpy(value, "-af9,beea");
+
+    printf("%llf\n", toBaseTen(value, 16));
     fflush(stdout);
 }
