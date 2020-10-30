@@ -103,21 +103,86 @@ long double toBaseTen(char* original_value, unsigned int base)
     return soma;
 }
 
-char* fromBaseTen(long double original_value, unsigned int base) {
-    return "Make function here";
+long double fromBaseTen(long double original_value, unsigned int base) {
+    
+    char value[100] = "";
+    char ret[100] = "";
+    char aux[100] = "";
+    bool isNegative = false;
+
+    sprintf(value, "%llf", original_value);
+    int i, j;
+    if(value[0] == '-') {
+        isNegative = true;
+        for(j = 0; j <= strlen(value); j++) {
+            value[j] = value[j+1];
+        }
+        printf("%s", value);
+    }
+    if(strchr(value, '.') != NULL) {
+        if(isNegative)
+            original_value*=-1;
+        int resultado = original_value;
+        int resto = 0;
+        int cont = 0;
+        int len = 0;
+        char charInt[2] = "";
+        while(resultado != 0) {
+            printf("\n%d", resultado);
+            resto = resultado - ((int)(resultado/base)*base);
+            resultado = resultado / base;
+
+            sprintf(charInt, "%d", resto);
+            
+            strcat(aux, charInt);
+            charInt[0] = "";
+            charInt[1] = "";
+            cont++;
+        }
+        
+        len = strlen(aux) - 1;
+        for(cont = 0; cont <= len; cont++) {
+            ret[cont] = aux[len-cont];
+        }
+        
+
+        strcat(ret, ".");
+
+        if(isNegative)
+            original_value*=-1;
+        resultado = original_value; 
+        long double decimal = original_value - resultado;
+        cont = 0;
+        char charDec[2];
+        while(decimal != 0 && cont < 6) {
+            sprintf(charDec, "%d", (int)(decimal*base));
+
+            decimal = decimal * base - (int)(decimal*base);
+            strcat(ret, charDec);
+            charDec[0] = "";
+            charDec[1] = "";
+            cont++;
+        }
+    }
+    if(isNegative)
+        return -(strtod(ret, NULL));
+
+    return strtod(ret, NULL);
 }
 
 int main() 
 {
+    // VALIDAR TUDO!!!
+    // Verificar caso os valores digitado são coerentes com a base de origiem
     char str_value[100];
     unsigned int original_base;
     unsigned int final_base;
 
-    // printf("Type a value: ");
-    // fflush(stdout);
+    printf("Type a value: ");
+    fflush(stdout);
 
-    // scanf("%s", &str_value);
-    // fflush(stdin);
+    scanf("%s", &str_value);
+    fflush(stdin);
 
     // printf("Type the original base: ");
     // fflush(stdout);
@@ -135,6 +200,10 @@ int main()
     value = (char*)malloc(100*sizeof(char));
     strcpy(value, "-af9,beea");
 
-    printf("%llf\n", toBaseTen(value, 16));
+    //printf("%llf\n", toBaseTen(value, 16));
+    //fromBaseTen(246.0, 2);
+    printf("\n%llf", fromBaseTen(toBaseTen(str_value, 2), 9));
+    //printf("%s", tst());
+
     fflush(stdout);
 }
