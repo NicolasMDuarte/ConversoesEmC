@@ -1,0 +1,13 @@
+﻿  Conversion.c
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(60,23): warning C4018: '<=': incompatibilidade de signed/unsigned
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(69,23): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(101,34): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(121,23): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(176,20): warning C4475: 'sprintf': o modificador de comprimento 'll' não pode ser usado com o caractere de campo do tipo 'f' no especificador de formato
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(182,23): warning C4018: '<=': incompatibilidade de signed/unsigned
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(192,35): warning C4244: '=': conversão de 'long double' para 'int', possível perda de dados
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(217,35): warning C4244: '=': conversão de 'long double' para 'int', possível perda de dados
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(278,19): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(250): warning C4172: retornando o endereço da variável local ou temporário: ret
+C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Projeto\Conversion.c(253): warning C4172: retornando o endereço da variável local ou temporário: ret
+  Projeto.vcxproj -> C:\Users\nicol\OneDrive\Documentos\GitHub\ConversoesEmC\VisualStudio\Projeto\Debug\Projeto.exe
