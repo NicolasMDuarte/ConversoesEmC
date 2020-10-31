@@ -9,7 +9,7 @@ enum boolean {
     true,
 } bool;
 
-long double pow(double num,int pot) { 
+long double powered(double num, int pot) { 
     int i;
     long double ret = num;
 
@@ -66,9 +66,9 @@ long double toBaseTen(char* original_value, unsigned int base)
                     value[i] = toupper(value[i]);
                 
                 x = value[i];
-                soma += (x - 55) * pow(base, commaPos - i - 1);
+                soma += (x - 55) * powered(base, commaPos - i - 1);
             } else
-                soma += ((unsigned int)value[i] - 48) * pow(base, commaPos - i - 1);
+                soma += ((unsigned int)value[i] - 48) * powered(base, commaPos - i - 1);
         }
 
         for(j = commaPos+1; j < strlen(value); j++) {
@@ -78,9 +78,9 @@ long double toBaseTen(char* original_value, unsigned int base)
                     value[j] = toupper(value[j]);
                 
                 x = value[j];
-                soma += (x - 55) * pow(base, commaPos - j);
+                soma += (x - 55) * powered(base, commaPos - j);
             } else
-                soma += ((unsigned int)value[j] - 48) * pow(base, commaPos - j);
+                soma += ((unsigned int)value[j] - 48) * powered(base, commaPos - j);
         }
     } else {
         int i;
@@ -91,9 +91,9 @@ long double toBaseTen(char* original_value, unsigned int base)
                     value[i] = toupper(value[i]);
                 
                 x = value[i];
-                soma += (x - 55) * pow(base, strlen(value) - i - 1);
+                soma += (x - 55) * powered(base, strlen(value) - i - 1);
             } else
-                soma += ((unsigned int)value[i] - 48) * pow(base, strlen(value) - i - 1);
+                soma += ((unsigned int)value[i] - 48) * powered(base, strlen(value) - i - 1);
         }
     }
 
@@ -117,7 +117,6 @@ long double fromBaseTen(long double original_value, unsigned int base) {
         for(j = 0; j <= strlen(value); j++) {
             value[j] = value[j+1];
         }
-        printf("%s", value);
     }
     if(strchr(value, '.') != NULL) {
         if(isNegative)
@@ -128,15 +127,12 @@ long double fromBaseTen(long double original_value, unsigned int base) {
         int len = 0;
         char charInt[2] = "";
         while(resultado != 0) {
-            printf("\n%d", resultado);
             resto = resultado - ((int)(resultado/base)*base);
             resultado = resultado / base;
 
             sprintf(charInt, "%d", resto);
             
             strcat(aux, charInt);
-            charInt[0] = "";
-            charInt[1] = "";
             cont++;
         }
         
@@ -159,8 +155,6 @@ long double fromBaseTen(long double original_value, unsigned int base) {
 
             decimal = decimal * base - (int)(decimal*base);
             strcat(ret, charDec);
-            charDec[0] = "";
-            charDec[1] = "";
             cont++;
         }
     }
@@ -184,26 +178,19 @@ int main()
     scanf("%s", &str_value);
     fflush(stdin);
 
-    // printf("Type the original base: ");
-    // fflush(stdout);
+    printf("Type the original base: ");
+    fflush(stdout);
 
-    // scanf("%i", &original_base);
-    // fflush(stdin);
+    scanf("%i", &original_base);
+    fflush(stdin);
 
-    // printf("Type the final base: ");
-    // fflush(stdout);
+    printf("Type the final base: ");
+    fflush(stdout);
 
-    // scanf("%i", &final_base);
-    // fflush(stdin);
+    scanf("%i", &final_base);
+    fflush(stdin);
 
-    char* value;
-    value = (char*)malloc(100*sizeof(char));
-    strcpy(value, "-af9,beea");
-
-    //printf("%llf\n", toBaseTen(value, 16));
-    //fromBaseTen(246.0, 2);
-    printf("\n%llf", fromBaseTen(toBaseTen(str_value, 2), 9));
-    //printf("%s", tst());
+    printf("\n%llf", fromBaseTen(toBaseTen(str_value, original_base), final_base));
 
     fflush(stdout);
 }
